@@ -5,10 +5,8 @@ import {useState, useEffect} from 'react'
 function App() {
   const [pokemon, setPokemon] = useState([])
   const [generation, setGeneration] = useState(1)
-  // let genOne = form;
- 
-  // const url = `https://pokeapi.co/api/v2/pokemon?limit=${genOne}`;
 
+  //enum for sets
   const generationOffsets = {
     1: { offset: 0, limit: 151 },   // Gen 1: 1 - 151
     2: { offset: 151, limit: 100 }, // Gen 2: 152 - 251
@@ -18,7 +16,7 @@ function App() {
     6: { offset: 649, limit: 72 },  // Gen 6: 650 - 721
     7: { offset: 721, limit: 88 },  // Gen 7: 722 - 809
     8: { offset: 809, limit: 89 },  // Gen 8: 810 - 898
-    9: { offset: 898, limit: 112 }, // Gen 9: 899 - 1010
+    9: { offset: 898, limit: 127 }, // Gen 9: 899 - 1010
   };
 
   const { offset, limit } = generationOffsets[generation];
