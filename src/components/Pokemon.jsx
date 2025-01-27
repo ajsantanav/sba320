@@ -2,8 +2,6 @@ import React from 'react'
 
 function Pokemon({ pokemon }) {
 
-
-
   return (
     <div className='pokemon-container'>
       {pokemon.map(({id, pokeName, spriteShiny, spriteNormal, type1, type2}) => (

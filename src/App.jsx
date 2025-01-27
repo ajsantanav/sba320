@@ -1,10 +1,23 @@
 import Pokemon from "./components/Pokemon"
+import Form from "./components/Form"
 import {useState, useEffect} from 'react'
 
 function App() {
   const genOne = 151;
+  const genSelect = () => {
+    const url = `https://pokeapi.co/api/v2/pokemon?offset=151&limit=100`;
+    switch (value) {
+      case 1:
+        return url = `https://pokeapi.co/api/v2/pokemon?offset=151&limit=151`;
+      case 2:
+        return <ComponentTwo />;
+      default:
+        return <ComponentThree />;
+    }
+  };
   const url = `https://pokeapi.co/api/v2/pokemon?limit=${genOne}`;
   const [pokemon, setPokemon] = useState([])
+  const [form, setForm] = useState({})
 
   //Fetch request
   const getPokemon = async () => {
@@ -44,7 +57,8 @@ function App() {
 
   return (
     <>
-        <Pokemon pokemon={pokemon}/>
+      <Form/>
+      <Pokemon pokemon={pokemon}/>
     </>
   )
 }
