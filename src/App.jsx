@@ -1,33 +1,50 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import Pokemon from "./components/Pokemon"
+import {useState, useEffect} from 'react'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const genOne = 151;
+  const url = `https://pokeapi.co/api/v2/pokemon?limit=${genOne}`;
+  const [pokemon, setPokemon] = useState([])
+
+  //Fetch request
+  const getPokemon = async () => {
+    try {
+      const response = await fetch(url)
+      const pokeData = await response.json();
+      
+      const pokemonInfo = await Promise.all(
+        pokeData.results.map(async (pokemon) => {
+            const res = await fetch(pokemon.url); 
+            const details = await res.json();
+
+            return {
+                id: details.id,
+                name: details.name,
+                type1: details.types[0]?.type.name,
+                type2: details.types[1]?.type.name || null,
+                spriteNormal: details.sprites?.front_default,
+                spriteShiny: details.sprites?.front_shiny,
+            };
+        })
+      );
+
+      setPokemon(pokemonInfo)
+    }
+    catch(err) {
+      console.error(err)
+    }
+  }
+
+
+  //Side effect
+  useEffect(() => {
+    getPokemon();
+  }, []);
+
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Pokemon pokemon={pokemon}/>
     </>
   )
 }
