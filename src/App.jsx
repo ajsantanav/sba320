@@ -19,7 +19,7 @@ function App() {
 
             return {
                 id: details.id,
-                name: details.name,
+                pokeName: details.name,
                 type1: details.types[0]?.type.name,
                 type2: details.types[1]?.type.name || null,
                 spriteNormal: details.sprites?.front_default,
