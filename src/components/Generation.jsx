@@ -4,7 +4,7 @@ function Generation({setGeneration}) {
   return (
     <div>
       <form>
-        <label>Seelect Generation:</label>
+        <label>Select Generation:</label>
         <select name="pokemon-gen" id="generation"
           onChange={(e) => {setGeneration(Number(e.target.value))}}
         >

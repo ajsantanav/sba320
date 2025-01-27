@@ -4,16 +4,28 @@ import {useState, useEffect} from 'react'
 
 function App() {
   const [pokemon, setPokemon] = useState([])
-  const [generation, setGeneration] = useState(151)
+  const [generation, setGeneration] = useState(1)
   // let genOne = form;
  
   // const url = `https://pokeapi.co/api/v2/pokemon?limit=${genOne}`;
 
+  const generationOffsets = {
+    1: { offset: 0, limit: 151 },   // Gen 1: 1 - 151
+    2: { offset: 151, limit: 100 }, // Gen 2: 152 - 251
+    3: { offset: 251, limit: 135 }, // Gen 3: 252 - 386
+    4: { offset: 386, limit: 107 }, // Gen 4: 387 - 493
+    5: { offset: 493, limit: 156 }, // Gen 5: 494 - 649
+    6: { offset: 649, limit: 72 },  // Gen 6: 650 - 721
+    7: { offset: 721, limit: 88 },  // Gen 7: 722 - 809
+    8: { offset: 809, limit: 89 },  // Gen 8: 810 - 898
+    9: { offset: 898, limit: 112 }, // Gen 9: 899 - 1010
+  };
+
+  const { offset, limit } = generationOffsets[generation];
 
   //Fetch request
   const getPokemon = async () => {
-    const offset = generation === 151 ? 0 : generation - 100;
-    const url = `https://pokeapi.co/api/v2/pokemon?limit=151?offset=${select}`;
+    const url = `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`;
     try {
       const response = await fetch(url)
       const pokeData = await response.json();
