@@ -1,23 +1,30 @@
 import Pokemon from "./components/Pokemon"
-import Form from "./components/Form"
+import Generation from "./components/Generation"
 import {useState, useEffect} from 'react'
 
 function App() {
-  const genOne = 151;
-  const genSelect = () => {
-    const url = `https://pokeapi.co/api/v2/pokemon?offset=151&limit=100`;
-    switch (value) {
-      case 1:
-        return url = `https://pokeapi.co/api/v2/pokemon?offset=151&limit=151`;
-      case 2:
-        return <ComponentTwo />;
-      default:
-        return <ComponentThree />;
-    }
-  };
-  const url = `https://pokeapi.co/api/v2/pokemon?limit=${genOne}`;
+  let genOne = form;
+ 
+  // const url = `https://pokeapi.co/api/v2/pokemon?limit=${genOne}`;
+  const url = `https://pokeapi.co/api/v2/pokemon?limit=151`;
+
   const [pokemon, setPokemon] = useState([])
-  const [form, setForm] = useState({})
+  const [generation, setGeneration] = useState(151)
+
+  // const genSelect = () => {
+  //   const url = `https://pokeapi.co/api/v2/pokemon?offset=151&limit=100`;
+  //   switch (value) {
+  //     case "":
+  //       setForm(url = `https://pokeapi.co/api/v2/pokemon?offset=151&limit=151`);
+  //     case 2:
+  //       return <ComponentTwo />;
+  //     default:
+  //       return <ComponentThree />;
+  //   }
+
+  //   setForm()
+  // };
+
 
   //Fetch request
   const getPokemon = async () => {
@@ -52,12 +59,11 @@ function App() {
   //Side effect
   useEffect(() => {
     getPokemon();
-  }, []);
-
+  }, [generation]);
 
   return (
     <>
-      <Form/>
+      <Generation setGeneration={setGeneration}/>
       <Pokemon pokemon={pokemon}/>
     </>
   )
