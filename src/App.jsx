@@ -3,31 +3,17 @@ import Generation from "./components/Generation"
 import {useState, useEffect} from 'react'
 
 function App() {
-  let genOne = form;
- 
-  // const url = `https://pokeapi.co/api/v2/pokemon?limit=${genOne}`;
-  const url = `https://pokeapi.co/api/v2/pokemon?limit=151`;
-
   const [pokemon, setPokemon] = useState([])
   const [generation, setGeneration] = useState(151)
-
-  // const genSelect = () => {
-  //   const url = `https://pokeapi.co/api/v2/pokemon?offset=151&limit=100`;
-  //   switch (value) {
-  //     case "":
-  //       setForm(url = `https://pokeapi.co/api/v2/pokemon?offset=151&limit=151`);
-  //     case 2:
-  //       return <ComponentTwo />;
-  //     default:
-  //       return <ComponentThree />;
-  //   }
-
-  //   setForm()
-  // };
+  // let genOne = form;
+ 
+  // const url = `https://pokeapi.co/api/v2/pokemon?limit=${genOne}`;
 
 
   //Fetch request
   const getPokemon = async () => {
+    const offset = generation === 151 ? 0 : generation - 100;
+    const url = `https://pokeapi.co/api/v2/pokemon?limit=151?offset=${select}`;
     try {
       const response = await fetch(url)
       const pokeData = await response.json();
@@ -54,7 +40,6 @@ function App() {
       console.error(err)
     }
   }
-
 
   //Side effect
   useEffect(() => {
