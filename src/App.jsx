@@ -44,7 +44,9 @@ function App() {
 
   return (
     <>
-      <Pokemon pokemon={pokemon}/>
+      <div className="container">
+        <Pokemon pokemon={pokemon}/>
+      </div>
     </>
   )
 }
